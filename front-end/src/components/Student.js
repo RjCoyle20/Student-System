@@ -1,7 +1,6 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import { Container, Paper, formControlClasses } from '@mui/material';
-import { makeStyles } from '@mui/material';
+import { Container, Paper, formControlClasses, Button } from '@mui/material';
 import { useState } from 'react';
 
 // const useStyles = makeStyles((theme) => ({
@@ -18,6 +17,11 @@ export default function Student() {
     const[name, setName]=useState('')
     const[address, setAddress]=useState('')
     // const classes = useStyles();
+    const handleClick = (e)=> {
+        e.preventDefault()
+        const student= {name, address}
+        console.log(student)
+    }
 
   return (
         
@@ -32,6 +36,7 @@ export default function Student() {
                     <TextField id="standard-basic" label="Student Address" variant="standard" fullWidth 
                     value={address}
                     onChange={(e)=> setAddress(e.target.value)}/>
+                    <Button variant="contained" color='secondary' onClick={handleClick}>Submit</Button>
                 </form>
                 {name}
                 {address}
