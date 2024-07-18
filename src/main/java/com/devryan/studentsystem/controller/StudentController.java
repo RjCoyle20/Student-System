@@ -3,6 +3,7 @@ package com.devryan.studentsystem.controller;
 import com.devryan.studentsystem.model.Student;
 import com.devryan.studentsystem.repository.StudentRepository;
 import com.devryan.studentsystem.service.StudentService;
+import com.devryan.studentsystem.service.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,8 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired StudentServiceImpl studentServiceImpl;
+
     @PostMapping("/add")
     public String add(@RequestBody Student student) {
         studentService.saveStudent(student);
@@ -29,16 +32,18 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
-    @PutMapping("/update/{id}")
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getStudentById (@PathVariable int id){
+        Student student = studentServiceImpl.findStudentById(id);
+        if(student == null ) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(student);
+    }
+
+    @PatchMapping("/{id}")
     public ResponseEntity<?> updateStudent(@PathVariable int id, @RequestBody Student student) {
 
-        Optional<Student> updateStudent = studentService.findStudentById(id);
-
-        if(updateStudent.isPresent()) {
-            updateStudent.get().setName(student.getName());
-            updateStudent.get().setAddress(student.getAddress());
-            studentService.saveStudent(student);
-        }
-        return new ResponseEntity<>(studentService.findStudentById(id), HttpStatus.OK);
+        Student updateStudent = studentServiceImpl.updateStudent(id, student);
+        if (updateStudent == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return ResponseEntity.ok(updateStudent);
     }
 }
