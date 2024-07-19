@@ -2,6 +2,7 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import { Container, Paper, formControlClasses, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 // const useStyles = makeStyles((theme) => ({
 //     root: {
@@ -17,6 +18,8 @@ export default function Student() {
     const[name, setName]=useState('')
     const[address, setAddress]=useState('')
     const[students, setStudents]=useState([])
+    const navigate = useNavigate();
+
     // const classes = useStyles();
     const handleClick = (e)=> {
         e.preventDefault()
@@ -39,6 +42,9 @@ export default function Student() {
         }
     )},[])
 
+    const handleUpdate = (studentId) => {
+        navigate(`/student/${studentId}`);
+    }
   return (
         
         <Container>
@@ -63,6 +69,9 @@ export default function Student() {
                         Id:{student.id}<br/>
                         Name:{student.name}<br/>
                         Address:{student.address}
+                        
+                        <Button variant='outline-secondary' onClick={()=>handleUpdate(student.id)}></Button>{' '}
+                        {/* <Button variant='outline-danger' onClick={()=>handleDelete(student.id)}>Delete</Button> */}
                     </Paper>
 
                 ))}
