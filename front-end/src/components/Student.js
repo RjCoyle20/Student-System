@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import { Container, Paper, formControlClasses, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { Table } from 'react-bootstrap';
 
 // const useStyles = makeStyles((theme) => ({
 //     root: {
@@ -62,21 +63,40 @@ export default function Student() {
                 </form>
                 
             </Paper>
+            
             <h1>Students</h1>
-            <Paper elevation={3} style={paperStyle}>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Hometown</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {students.map(student => (
+                        <tr key={student.id}>
+                            <td>{student.id}</td>
+                            <td>{student.name}</td>
+                            <td>{student.address}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+            {/* <Paper elevation={3} style={paperStyle}>
                 {students.map(student=>(
                     <Paper elevation={6} style={{margin:"10px", padding:"15", textAlign:"left"}} key={student.id}>
                         Id:{student.id}<br/>
                         Name:{student.name}<br/>
                         Address:{student.address}
                         
-                        <Button variant='outline-secondary' onClick={()=>handleUpdate(student.id)}></Button>{' '}
-                        {/* <Button variant='outline-danger' onClick={()=>handleDelete(student.id)}>Delete</Button> */}
+                        <Button variant='outline-secondary' onClick={()=>handleUpdate(student.id)}>Update</Button>{' '}
+                        {/* <Button variant='outline-danger' onClick={()=>handleDelete(student.id)}>Delete</Button> 
                     </Paper>
 
                 ))}
 
-            </Paper>
+            </Paper> */}
         </Container>
   );
 }
