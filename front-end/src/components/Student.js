@@ -71,6 +71,7 @@ export default function Student() {
                         <th>#</th>
                         <th>Name</th>
                         <th>Hometown</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
