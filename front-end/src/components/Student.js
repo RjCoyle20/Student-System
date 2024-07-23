@@ -4,7 +4,7 @@ import { Container, Paper, formControlClasses, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { Table } from 'react-bootstrap';
-
+import './Student.css'
 // const useStyles = makeStyles((theme) => ({
 //     root: {
 //     '& > *': {
@@ -65,7 +65,7 @@ export default function Student() {
             </Paper>
             
             <h1>Students</h1>
-            <Table striped bordered hover>
+            <Table className='center-table' striped bordered hover>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -79,6 +79,10 @@ export default function Student() {
                             <td>{student.id}</td>
                             <td>{student.name}</td>
                             <td>{student.address}</td>
+                            <td className='table-button'>
+                            <Button  variant='outlined' onClick={()=>handleUpdate(student.id)}>Update</Button>{' '}
+                            <Button variant='outlined' color='error' /*onClick={()=>handleDelete(student.id)}*/>Delete</Button> 
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -90,7 +94,7 @@ export default function Student() {
                         Name:{student.name}<br/>
                         Address:{student.address}
                         
-                        <Button variant='outline-secondary' onClick={()=>handleUpdate(student.id)}>Update</Button>{' '}
+                        
                         {/* <Button variant='outline-danger' onClick={()=>handleDelete(student.id)}>Delete</Button> 
                     </Paper>
 
