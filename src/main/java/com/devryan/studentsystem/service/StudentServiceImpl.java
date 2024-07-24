@@ -26,17 +26,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
-    public Student findStudentById(int id) {
+    public Student findStudentById(Long id) {
         return studentRepository.findById(id).orElse(null);
     }
 
 
-    public Student updateStudent(int id, Student student) {
+    public Student updateStudent(Long id, Student student) {
         Optional<Student> optionalStudent = studentRepository.findById(id);
         if(optionalStudent.isPresent()) {
             Student existingStudent = optionalStudent.get();
 
-            existingStudent.setId(student.getId());
             existingStudent.setName(student.getName());
             existingStudent.setAddress(student.getAddress());
 

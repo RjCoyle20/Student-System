@@ -33,14 +33,14 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getStudentById (@PathVariable int id){
+    public ResponseEntity<?> getStudentById (@PathVariable Long id){
         Student student = studentServiceImpl.findStudentById(id);
         if(student == null ) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(student);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> updateStudent(@PathVariable int id, @RequestBody Student student) {
+    public ResponseEntity<?> updateStudent(@PathVariable Long id, @RequestBody Student student) {
 
         Student updateStudent = studentServiceImpl.updateStudent(id, student);
         if (updateStudent == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

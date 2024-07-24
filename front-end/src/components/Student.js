@@ -70,7 +70,7 @@ export default function Student() {
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Hometown</th>
+                        <th>Locale</th>
                         <th>Action</th>
                     </tr>
                 </thead>
