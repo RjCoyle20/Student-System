@@ -4,6 +4,7 @@ import com.devryan.studentsystem.model.Student;
 import com.devryan.studentsystem.repository.StudentRepository;
 import com.devryan.studentsystem.service.StudentService;
 import com.devryan.studentsystem.service.StudentServiceImpl;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +46,15 @@ public class StudentController {
         Student updateStudent = studentServiceImpl.updateStudent(id, student);
         if (updateStudent == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         return ResponseEntity.ok(updateStudent);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteStudent(@PathVariable Long id) {
+        try{
+            studentServiceImpl.deleteStudent(id);
+            return new ResponseEntity<>("Employee with ID " + id + " deleted successfully", HttpStatus.OK);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 }

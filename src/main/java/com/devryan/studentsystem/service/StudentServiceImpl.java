@@ -2,6 +2,7 @@ package com.devryan.studentsystem.service;
 
 import com.devryan.studentsystem.model.Student;
 import com.devryan.studentsystem.repository.StudentRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,4 +45,10 @@ public class StudentServiceImpl implements StudentService {
         return null;
     }
 
+    public void deleteStudent(Long id) {
+        if (!studentRepository.existsById(id)) {
+            throw new EntityNotFoundException("Employee with ID " + id + " not found");
+        }
+        studentRepository.deleteById(id);
+    }
 }
