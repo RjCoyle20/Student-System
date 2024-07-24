@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router';
 import './App.css';
 import Appbar from './components/Appbar';
 import Student from './components/Student';
+import UpdateStudent from './components/addOrUpdate/UpdateStudent';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <Appbar/>
       <Routes>
       <Route path='/student' element={<Student/>}/>
-      {/* <Route path='/student/:id' element={<UpdateStudent/>}/> */}
+      <Route path='/student/:id' element={<UpdateStudent/>}/>
       
       </Routes>
     </div>
