@@ -35,6 +35,7 @@ export default function Student() {
         })
     }
 
+
     useEffect(()=> {
         fetch("http://localhost:8080/student/getAll")
         .then(res=>res.json())
@@ -46,6 +47,23 @@ export default function Student() {
     const handleUpdate = (studentId) => {
         navigate(`/student/${studentId}`);
     }
+
+    const handleDelete = async (studentId) => {
+        try {
+            const response = await fetch (`http://localhost:8080/student/${studentId}`,{
+                method:"DELETE",
+            });
+            if (response.ok) {
+                setStudents((prevStudents) => 
+                prevStudents.filter((student) => student.id !== studentId)
+                )
+            }
+            console.log(`Student with ID ${studentId} deleted successfully`);
+        } catch (error) {
+            console.error ("Error deleting employee:", error.message);
+        }
+    }
+
   return (
         
         <Container>
@@ -82,7 +100,7 @@ export default function Student() {
                             <td>{student.address}</td>
                             <td className='table-button'>
                             <Button  variant='outlined' onClick={()=>handleUpdate(student.id)}>Update</Button>{' '}
-                            <Button variant='outlined' color='error' /*onClick={()=>handleDelete(student.id)}*/>Delete</Button> 
+                            <Button variant='outlined' color='error' onClick={()=>handleDelete(student.id)}>Delete</Button> 
                             </td>
                         </tr>
                     ))}
