@@ -6,12 +6,14 @@ import Typography from '@mui/material/Typography';
 
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function Appbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar >
           <IconButton
             size="large"
             edge="start"
@@ -24,6 +26,7 @@ export default function Appbar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Spring Boot React Full Stack Application
           </Typography>
+          <Button color='inherit' as={Link} to="student" className='nav-link'>All Students</Button>
         </Toolbar>
       </AppBar>
     </Box>

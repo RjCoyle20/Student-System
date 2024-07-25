@@ -33,6 +33,7 @@ export default function Student() {
         }).then(() => {
             console.log("New Student added")
         })
+        
     }
 
 
@@ -68,7 +69,7 @@ export default function Student() {
         
         <Container>
             <Paper elevation={3} style={paperStyle}>
-                    <h1 style={{color:"blue"}}><u>Add Student</u></h1>
+                    <h1 style={{color:""}}><u>Add Student</u></h1>
                 <form className={formControlClasses} noValidate autoComplete="off">
    
                     <TextField id="standard-basic" label="Student Name" variant="standard" fullWidth
